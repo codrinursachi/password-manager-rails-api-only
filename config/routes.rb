@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :trashes
   resources :shared_login_data
   resources :custom_fields
   resources :urls
