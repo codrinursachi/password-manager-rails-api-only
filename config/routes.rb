@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :custom_fields
   resources :urls
   resources :logins
   resources :folders
