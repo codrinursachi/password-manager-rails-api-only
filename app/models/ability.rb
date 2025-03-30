@@ -4,6 +4,14 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    return unless user.present?
+    can :manage, Folder, { user: }
+    can :manage, Login, folder: { user: }
+    can :show, Login, shared_login_data: { user: }
+    can :new, Login
+    can :manage, SharedLoginDatum, login: { folder: { user_id: user.id } }
+    can [ :read, :destroy ], SharedLoginDatum, { user: }
+    can :new, SharedLoginDatum
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
