@@ -1,10 +1,8 @@
 class FoldersController < ApplicationController
-  before_action :set_folder, only: %i[ show update destroy ]
+  load_and_authorize_resource
 
   # GET /folders
   def index
-    @folders = Folder.all
-
     render json: @folders
   end
 
@@ -15,8 +13,6 @@ class FoldersController < ApplicationController
 
   # POST /folders
   def create
-    @folder = Folder.new(folder_params)
-
     if @folder.save
       render json: @folder, status: :created, location: @folder
     else
@@ -40,9 +36,6 @@ class FoldersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_folder
-      @folder = Folder.find(params.expect(:id))
-    end
 
     # Only allow a list of trusted parameters through.
     def folder_params

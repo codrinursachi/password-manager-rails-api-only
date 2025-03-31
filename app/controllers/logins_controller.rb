@@ -1,10 +1,8 @@
 class LoginsController < ApplicationController
-  before_action :set_login, only: %i[ show update destroy ]
+  load_and_authorize_resource
 
   # GET /logins
   def index
-    @logins = Login.all
-
     render json: @logins
   end
 
@@ -15,8 +13,6 @@ class LoginsController < ApplicationController
 
   # POST /logins
   def create
-    @login = Login.new(login_params)
-
     if @login.save
       render json: @login, status: :created, location: @login
     else
@@ -35,17 +31,22 @@ class LoginsController < ApplicationController
 
   # DELETE /logins/1
   def destroy
-    @login.destroy!
+    @login.update(trash_date: Time.now)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_login
-      @login = Login.find(params.expect(:id))
-    end
 
     # Only allow a list of trusted parameters through.
     def login_params
-      params.expect(login: [ :name, :login_name, :login_password, :notes, :is_favorite, :folder_id ])
+      params.expect(login: [ :name, :login_name, :login_password, :notes, :is_favorite, :folder_id, :file, urls_attributes, custom_fields_attributes ])
+    end
+
+    def urls_attributes
+      { urls_attributes: [ [ :id, :uri ] ] }
+    end
+
+    def custom_fields_attributes
+      { custom_fields_attributes: [ [ :id, :name, :value ] ] }
     end
 end
