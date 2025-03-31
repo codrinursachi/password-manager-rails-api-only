@@ -51,3 +51,5 @@ group :development, :test do
 end
 
 gem "cancancan"
+
+gem "rack-cors"
