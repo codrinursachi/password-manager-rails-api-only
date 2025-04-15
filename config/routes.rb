@@ -1,19 +1,23 @@
 Rails.application.routes.draw do
-  devise_for :users, path: "", path_names: {
-    sign_in: "login",
-    sign_out: "logout",
-    registration: "signup"
-  },
-  controllers: {
-    sessions: "users/sessions",
-    registrations: "users/registrations"
-  }
-  resources :trashes
-  resources :shared_login_data
-  resources :custom_fields
-  resources :urls
-  resources :logins
-  resources :folders
+  scope :api do
+    scope :v1 do
+      devise_for :users, path: "", path_names: {
+        sign_in: "login",
+        sign_out: "logout",
+        registration: "signup"
+      },
+      controllers: {
+        sessions: "users/sessions",
+        registrations: "users/registrations"
+      }
+      resources :trashes
+      resources :shared_login_data
+      resources :custom_fields
+      resources :urls
+      resources :logins
+      resources :folders
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

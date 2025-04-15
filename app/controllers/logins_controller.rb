@@ -16,18 +16,37 @@ class LoginsController < ApplicationController
     @logins.includes(:folder)
     filter_scopes[:folder].call if params[:folder_id].present?
 
-    render json: @logins
+    render json: @logins.includes(:urls).map { |login|
+      {
+        login_id: login.id,
+        name: login.name,
+        login_name: login.login_name,
+        login_password: login.login_password,
+        file: login.file.attached? ? rails_blob_path(login.file, disposition: "attachment") : nil,
+        urls: login.urls.map(&:uri)
+      }
+    }
   end
 
   # GET /logins/1
   def show
-    render json: @login
+    render json: {
+      id: @login.id,
+      name: @login.name,
+      login_name: @login.login_name,
+      login_password: @login.login_password,
+      notes: @login.notes,
+      is_favorite: @login.is_favorite,
+      folder_id: @login.folder_id,
+      urls: @login.urls.map { |url| { id: url.id, uri: url.uri } },
+      custom_fields: @login.custom_fields.map { |custom_field| { id: custom_field.id, name: custom_field.name, value: custom_field.value } }
+    }
   end
 
   # POST /logins
   def create
     if @login.save
-      render json: @login, status: :created, location: @login
+      render json: { id: @login.id, name: @login.name, login_name: @login.login_name }, status: :created, location: @login
     else
       render json: @login.errors, status: :unprocessable_entity
     end
@@ -36,7 +55,7 @@ class LoginsController < ApplicationController
   # PATCH/PUT /logins/1
   def update
     if @login.update(login_params)
-      render json: @login
+      render json: { id: @login.id, name: @login.name, login_name: @login.login_name }
     else
       render json: @login.errors, status: :unprocessable_entity
     end
