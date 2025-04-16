@@ -1,5 +1,9 @@
 class SharedLoginDataController < ApplicationController
-  authorize_resource except: :create
+  before_action :check
+  authorize_resource
+  def check
+    Rails.logger.debug current_user
+  end
   # GET /shared_login_data
   def index
     @shared_login_data = SharedLoginDatum.accessible_by(current_ability)
@@ -21,7 +25,7 @@ class SharedLoginDataController < ApplicationController
 
   # GET /shared_login_data/1
   def show
-    render json: @shared_login_datum
+    render json: @shared_login_datum.slice(:id, :login_id)
   end
 
   # POST /shared_login_data
@@ -34,7 +38,7 @@ class SharedLoginDataController < ApplicationController
       return
     end
     if @shared_login_datum.save
-      render json: @shared_login_datum, status: :created, location: @shared_login_datum
+      render json: @shared_login_datum.slice(:id, :login_id), status: :created, location: @shared_login_datum
     else
       render json: @shared_login_datum.errors, status: :unprocessable_entity
     end
