@@ -10,10 +10,9 @@ Rails.application.routes.draw do
         sessions: "users/sessions",
         registrations: "users/registrations"
       }
-      resources :trashes
+      resources :trashes, only: [ :index, :destroy ]
+      patch "trashes/:id", to: "trashes#restore"
       resources :shared_login_data
-      resources :custom_fields
-      resources :urls
       resources :logins
       resources :folders
     end
