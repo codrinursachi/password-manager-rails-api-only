@@ -1,6 +1,6 @@
 class SharedLoginDataController < ApplicationController
   before_action :check
-  authorize_resource except: :create
+  authorize_resource except: [ :create, :destroy ]
   def check
     Rails.logger.debug current_user
   end
