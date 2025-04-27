@@ -1,20 +1,13 @@
 Rails.application.routes.draw do
   scope :api do
     scope :v1 do
-      devise_for :users, path: "", path_names: {
-        sign_in: "login",
-        sign_out: "logout",
-        registration: "signup"
-      },
-      controllers: {
-        sessions: "users/sessions",
-        registrations: "users/registrations"
-      }
       resources :trashes, only: [ :index, :destroy ]
       patch "trashes/:id", to: "trashes#restore"
       resources :shared_login_data
       resources :logins
       resources :folders
+      post "/register", to: "users#create"
+      post "/login", to: "users#login"
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
