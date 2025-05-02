@@ -3,5 +3,5 @@ class Rsa < ApplicationRecord
 
   validates :public_key, presence: true
   validates :private_key, presence: true
-  validates :iv, presence: true
+  validates :private_key_iv, presence: true
 end
