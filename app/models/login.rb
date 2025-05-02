@@ -6,6 +6,7 @@ class Login < ApplicationRecord
   has_one_attached :file
 
   validates :name, :login_name, :login_password, presence: true
+  validates :iv, presence: true
 
   accepts_nested_attributes_for :urls, reject_if: :all_blank
   accepts_nested_attributes_for :custom_fields, reject_if: :all_blank

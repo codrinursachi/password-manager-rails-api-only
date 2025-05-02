@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       payload[:iat] = Time.now.to_i
       payload[:user_id] = @user.id
       response.headers["Authorization"] = JWT.encode(payload, Rails.application.secret_key_base.to_s)
-      render json: { message: "Login successful" }, status: :ok
+      render json: { message: "Login successful", salt: @user.salt }, status: :ok
     else
       render json: { error: "Invalid email or password" }, status: :unauthorized
     end
@@ -32,6 +32,6 @@ class UsersController < ApplicationController
   private
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :salt)
   end
 end

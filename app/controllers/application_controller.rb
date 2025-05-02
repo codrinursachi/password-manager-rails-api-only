@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_user
-  
+
   protected
     rescue_from CanCan::AccessDenied do |exception|
       Rails.logger.debug current_user

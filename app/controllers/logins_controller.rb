@@ -22,6 +22,7 @@ class LoginsController < ApplicationController
         name: login.name,
         login_name: login.login_name,
         login_password: login.login_password,
+        iv: login.iv,
         file: login.file.attached? ? rails_blob_path(login.file, disposition: "attachment") : nil,
         urls: login.urls.map(&:uri)
       }
@@ -35,6 +36,7 @@ class LoginsController < ApplicationController
       name: @login.name,
       login_name: @login.login_name,
       login_password: @login.login_password,
+      iv: @login.iv,
       notes: @login.notes,
       is_favorite: @login.is_favorite,
       folder_id: @login.folder_id,
@@ -71,7 +73,7 @@ class LoginsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def login_params
-      params.expect(login: [ :name, :login_name, :login_password, :notes, :is_favorite, :folder_id, :file, urls_attributes, custom_fields_attributes ])
+      params.expect(login: [ :name, :login_name, :login_password, :iv, :notes, :is_favorite, :folder_id, :file, urls_attributes, custom_fields_attributes ])
     end
 
     def urls_attributes
