@@ -69,8 +69,6 @@ class LoginsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-
     # Only allow a list of trusted parameters through.
     def login_params
       params.expect(login: [ :name, :login_name, :login_password, :iv, :notes, :is_favorite, :folder_id, :file, urls_attributes, custom_fields_attributes ])

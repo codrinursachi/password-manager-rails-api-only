@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     scope :v1 do
       resources :trashes, only: [ :index, :destroy ]
       patch "trashes/:id", to: "trashes#restore"
-      resources :shared_login_data
+      resources :shared_login_data, only: [ :index, :new, :create, :destroy ]
       resources :logins
       resources :folders
       post "/register", to: "users#create"
