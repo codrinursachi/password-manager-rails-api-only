@@ -21,6 +21,8 @@ class TrashesController < ApplicationController
 
   def restore
     @login = Login.accessible_by(current_ability).find(params[:id])
-    @login.update(trash_date: nil)
+    if @login.update(trash_date: nil)
+      render json: { message: "Login restored successfully" }, status: :ok
+    end
   end
 end
