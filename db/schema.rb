@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_02_101158) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_12_153726) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -71,6 +71,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_101158) do
     t.index ["folder_id"], name: "index_logins_on_folder_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "text"
+    t.string "iv"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "rsas", force: :cascade do |t|
     t.string "public_key"
     t.string "private_key"
@@ -114,6 +123,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_101158) do
   add_foreign_key "custom_fields", "logins"
   add_foreign_key "folders", "users"
   add_foreign_key "logins", "folders"
+  add_foreign_key "notes", "users"
   add_foreign_key "rsas", "users"
   add_foreign_key "shared_login_data", "logins"
   add_foreign_key "shared_login_data", "users"

@@ -12,6 +12,8 @@ class Ability
     can :manage, SharedLoginDatum, login: { folder: { user_id: user.id } }
     can [ :read, :destroy ], SharedLoginDatum, { user: }
     can :new, SharedLoginDatum
+    can :manage, Note, { user: }
+    can :new, Note
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

@@ -6,11 +6,6 @@ class FoldersController < ApplicationController
     render json: @folders
   end
 
-  # GET /folders/1
-  def show
-    render json: @folder
-  end
-
   # POST /folders
   def create
     if @folder.save

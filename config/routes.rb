@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope :api do
     scope :v1 do
+      resources :notes, only: [ :index, :create, :update, :destroy ]
       resources :trashes, only: [ :index, :destroy ]
       patch "trashes/:id", to: "trashes#restore"
       resources :shared_login_data, only: [ :index, :new, :create, :destroy ]
