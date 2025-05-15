@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :sshkeys
   scope :api do
     scope :v1 do
+      resources :sshkeys
       resources :notes, only: [ :index, :create, :update, :destroy ]
       resources :trashes, only: [ :index, :destroy ]
       patch "trashes/:id", to: "trashes#restore"

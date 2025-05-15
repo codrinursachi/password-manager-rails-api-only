@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_12_153726) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_14_190418) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -100,6 +100,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_153726) do
     t.index ["user_id"], name: "index_shared_login_data_on_user_id"
   end
 
+  create_table "sshkeys", force: :cascade do |t|
+    t.string "name"
+    t.string "private_key"
+    t.string "iv"
+    t.string "public_key"
+    t.string "notes"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sshkeys_on_user_id"
+  end
+
   create_table "urls", force: :cascade do |t|
     t.string "uri"
     t.integer "login_id", null: false
@@ -127,5 +139,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_153726) do
   add_foreign_key "rsas", "users"
   add_foreign_key "shared_login_data", "logins"
   add_foreign_key "shared_login_data", "users"
+  add_foreign_key "sshkeys", "users"
   add_foreign_key "urls", "logins"
 end

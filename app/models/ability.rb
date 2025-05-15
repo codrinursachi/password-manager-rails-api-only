@@ -14,6 +14,8 @@ class Ability
     can :new, SharedLoginDatum
     can :manage, Note, { user: }
     can :new, Note
+    can :manage, Sshkey, { user: }
+    can :new, Sshkey
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

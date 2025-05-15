@@ -78,7 +78,7 @@ GEM
     bcrypt_pbkdf (1.1.1)
     benchmark (0.4.0)
     bigdecimal (3.1.9)
-    bootsnap (1.18.4)
+    bootsnap (1.18.5)
       msgpack (~> 1.2)
     brakeman (7.0.2)
       racc
@@ -118,13 +118,13 @@ GEM
     json (2.12.0)
     jwt (2.10.1)
       base64
-    kamal (2.5.3)
+    kamal (2.6.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
       bcrypt_pbkdf (~> 1.0)
       concurrent-ruby (~> 1.2)
       dotenv (~> 3.1)
-      ed25519 (~> 1.2)
+      ed25519 (~> 1.4)
       net-ssh (~> 7.3)
       sshkit (>= 1.23.0, < 2.0)
       thor (~> 1.3)
@@ -159,6 +159,8 @@ GEM
       net-protocol
     net-ssh (7.3.0)
     nio4r (2.7.4)
+    nokogiri (1.18.8-aarch64-linux-gnu)
+      racc (~> 1.4)
     nokogiri (1.18.8-x64-mingw-ucrt)
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-gnu)
@@ -172,7 +174,7 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.4.0)
-    psych (5.2.5)
+    psych (5.2.6)
       date
       stringio
     puma (6.6.0)
@@ -288,6 +290,7 @@ GEM
       fugit (~> 1.11.0)
       railties (>= 7.1)
       thor (~> 1.3.1)
+    sqlite3 (2.6.0-aarch64-linux-gnu)
     sqlite3 (2.6.0-x64-mingw-ucrt)
     sqlite3 (2.6.0-x86_64-linux-gnu)
     sshkit (1.24.0)
@@ -300,6 +303,7 @@ GEM
     stringio (3.1.7)
     thor (1.3.2)
     thruster (0.1.13)
+    thruster (0.1.13-aarch64-linux)
     thruster (0.1.13-x86_64-linux)
     timeout (0.4.3)
     tzinfo (2.0.6)
@@ -318,6 +322,7 @@ GEM
     zeitwerk (2.7.2)
 
 PLATFORMS
+  aarch64-linux
   x64-mingw-ucrt
   x86_64-linux
 
