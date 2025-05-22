@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password validations: false
 
   validates :email, presence: true, uniqueness: true
   validates :salt, presence: true
+  validates :password, length: { minimum: 6 }, allow_blank: true
 
   has_many :folders, dependent: :destroy
   has_many :logins, through: :folders

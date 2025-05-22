@@ -55,3 +55,5 @@ gem "cancancan"
 gem "rack-cors"
 
 gem "jwt"
+
+gem "webauthn"
