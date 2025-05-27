@@ -57,3 +57,5 @@ gem "rack-cors"
 gem "jwt"
 
 gem "webauthn"
+
+gem "jb"

@@ -3,29 +3,27 @@ class SshkeysController < ApplicationController
 
   # GET /sshkeys
   def index
-    render json: @sshkeys
   end
 
   # GET /sshkeys/1
   def show
-    render json: @sshkey
   end
 
   # POST /sshkeys
   def create
     if @sshkey.save
-      render json: @sshkey, status: :created, location: @sshkey
+      render "sshkeys/sshkey", status: :created, location: @sshkey
     else
-      render json: @sshkey.errors, status: :unprocessable_entity
+      render locals: { error: @sshkey.errors }, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /sshkeys/1
   def update
     if @sshkey.update(sshkey_params)
-      render json: @sshkey
+      render "sshkeys/sshkey", status: :ok, location: @sshkey
     else
-      render json: @sshkey.errors, status: :unprocessable_entity
+      render locals: { error: @sshkey.errors }, status: :unprocessable_entity
     end
   end
 
@@ -37,6 +35,6 @@ class SshkeysController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def sshkey_params
-      params.expect(sshkey: [ :name, :private_key, :iv, :public_key, :notes ])
+      params.expect(sshkey: %i[ name private_key iv public_key notes ])
     end
 end

@@ -1,0 +1,13 @@
+@shared_login_data.map { |shared_login_datum|
+    {
+        id: shared_login_datum.id,
+        login_id: shared_login_datum.login_id,
+        shared_by: shared_login_datum.user.email,
+        shared_with: User.find(shared_login_datum.user_id).email,
+        name: shared_login_datum.login.login_name,
+        login_name: shared_login_datum.login.login_name,
+        login_password: shared_login_datum.password,
+        file: shared_login_datum.login.file.attached? ? rails_blob_path(shared_login_datum.login.file, disposition: "attachment") : nil,
+        urls: shared_login_datum.login.urls.map { |url| url.uri }
+    }
+}

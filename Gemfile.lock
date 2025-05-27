@@ -122,7 +122,8 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.12.0)
+    jb (0.8.2)
+    json (2.12.2)
     jwt (2.10.1)
       base64
     kamal (2.6.1)
@@ -239,12 +240,12 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.1)
       io-console (~> 0.5)
-    rspec-core (3.13.3)
+    rspec-core (3.13.4)
       rspec-support (~> 3.13.0)
-    rspec-expectations (3.13.4)
+    rspec-expectations (3.13.5)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.4)
+    rspec-mocks (3.13.5)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-rails (8.0.0)
@@ -255,7 +256,7 @@ GEM
       rspec-expectations (~> 3.13)
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
-    rspec-support (3.13.3)
+    rspec-support (3.13.4)
     rubocop (1.75.7)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -341,7 +342,7 @@ GEM
       openssl (>= 2.2)
       safety_net_attestation (~> 0.4.0)
       tpm-key_attestation (~> 0.14.0)
-    websocket-driver (0.7.7)
+    websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -359,6 +360,7 @@ DEPENDENCIES
   cancancan
   debug
   factory_bot_rails
+  jb
   jwt
   kamal
   puma (>= 5.0)

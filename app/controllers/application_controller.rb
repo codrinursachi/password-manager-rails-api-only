@@ -3,9 +3,7 @@ class ApplicationController < ActionController::API
 
   protected
     rescue_from CanCan::AccessDenied do |exception|
-      Rails.logger.debug current_user
-      Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
-      render json: { error: exception.message }, status: :forbidden
+      render "errors/error", locals: { error: exception.message }, status: :forbidden
     end
 
   private
@@ -20,7 +18,19 @@ class ApplicationController < ActionController::API
         decoded = JWT.decode(token, Rails.application.secret_key_base.to_s)[0]
         @current_user = User.new(id: decoded["user_id"])
       rescue JWT::DecodeError
-        render json: { error: "Invalid token" }, status: :unauthorized
+        render "errors/error", locals: { error: "Invalid token" }, status: :unauthorized
       end
+    end
+
+    def generate_token
+      payload = {}
+      payload[:exp] = 30.minutes.from_now.to_i
+      payload[:iat] = Time.now.to_i
+      payload[:user_id] = @user.id
+      response.headers["Authorization"] = JWT.encode(
+          payload, 
+          Rails.application.secret_key_base.to_s
+        )
+      response.set_header("Status", "ok")
     end
 end

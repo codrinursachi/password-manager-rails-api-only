@@ -3,24 +3,23 @@ class FoldersController < ApplicationController
 
   # GET /folders
   def index
-    render json: @folders
   end
 
   # POST /folders
   def create
     if @folder.save
-      render json: @folder, status: :created, location: @folder
+      render "folders/folder", status: :created
     else
-      render json: @folder.errors, status: :unprocessable_entity
+      render "errors/error", locals: { error: @folder.errors }, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /folders/1
   def update
     if @folder.update(folder_params)
-      render json: @folder
+      render "folders/folder", status: :ok
     else
-      render json: @folder.errors, status: :unprocessable_entity
+      render "errors/error", locals: { error: @folder.errors }, status: :unprocessable_entity
     end
   end
 
@@ -30,10 +29,8 @@ class FoldersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-
     # Only allow a list of trusted parameters through.
     def folder_params
-      params.expect(folder: [ :name, :user_id ])
+      params.expect(folder: %i[ name user_id ])
     end
 end

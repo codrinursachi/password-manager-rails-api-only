@@ -3,24 +3,23 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    render json: @notes
   end
 
   # POST /notes
   def create
     if @note.save
-      render json: @note, status: :created
+      render "notes/note", status: :created
     else
-      render json: @note.errors, status: :unprocessable_entity
+      render "errors/error", locals: { error: @note.errors }, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /notes/1
   def update
     if @note.update(note_params)
-      render json: @note
+      render "notes/note", status: :ok
     else
-      render json: @note.errors, status: :unprocessable_entity
+      render "errors/error", locals: { error: @note.errors }, status: :unprocessable_entity
     end
   end
 
@@ -32,6 +31,6 @@ class NotesController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def note_params
-      params.expect(note: [ :text, :iv ])
+      params.expect(note: %i[ text iv ])
     end
 end

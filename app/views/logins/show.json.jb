@@ -1,0 +1,12 @@
+{
+  id: @login.id,
+  name: @login.name,
+  login_name: @login.login_name,
+  login_password: @login.login_password,
+  iv: @login.iv,
+  notes: @login.notes,
+  is_favorite: @login.is_favorite,
+  folder_id: @login.folder_id,
+  urls: @login.urls.map { |url| { id: url.id, uri: url.uri } },
+  custom_fields: @login.custom_fields.map { |custom_field| { id: custom_field.id, name: custom_field.name, value: custom_field.value } }
+}

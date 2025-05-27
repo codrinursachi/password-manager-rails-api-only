@@ -1,0 +1,11 @@
+@logins.includes(:urls).map { |login|
+    {
+        login_id: login.id,
+        name: login.name,
+        login_name: login.login_name,
+        login_password: login.login_password,
+        file: login.file.attached? ? rails_blob_path(login.file, disposition: "attachment") : nil,
+        urls: login.urls.map(&:uri),
+        trash_date: login.trash_date
+    }
+}
