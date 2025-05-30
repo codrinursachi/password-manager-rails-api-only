@@ -5,6 +5,10 @@ class NotesController < ApplicationController
   def index
   end
 
+  def show
+    render "notes/note", status: :ok
+  end
+
   # POST /notes
   def create
     if @note.save
@@ -31,6 +35,6 @@ class NotesController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def note_params
-      params.expect(note: %i[ text iv ])
+      params.expect(note: %i[ text iv name name_iv])
     end
 end

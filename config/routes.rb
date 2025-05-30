@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   scope :api do
     scope :v1 do
       resources :sshkeys
-      resources :notes, only: [ :index, :create, :update, :destroy ]
-      resources :trashes, only: [ :index, :destroy ]
+      resources :notes, only: %i[ index show create update destroy ]
+      resources :trashes, only: %i[ index destroy ]
       patch "trashes/:id", to: "trashes#restore"
-      resources :shared_login_data, only: [ :index, :new, :create, :destroy ]
+      resources :shared_login_data, only: %i[ index new create destroy ]
       resources :logins
       resources :folders
       post "/register", to: "users#create"

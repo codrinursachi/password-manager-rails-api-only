@@ -28,7 +28,7 @@ class ApplicationController < ActionController::API
       payload[:iat] = Time.now.to_i
       payload[:user_id] = @user.id
       response.headers["Authorization"] = JWT.encode(
-          payload, 
+          payload,
           Rails.application.secret_key_base.to_s
         )
       response.set_header("Status", "ok")
