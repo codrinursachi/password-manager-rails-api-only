@@ -28,7 +28,7 @@ class WebauthnController < ApplicationController
     @challenge_token = JWT.encode(
       {
         user_id: user.id,
-        challenge: creation_options.challenge,
+        challenge: @creation_options.challenge,
         action: "registration",
         exp: 5.minutes.from_now.to_i
       },
