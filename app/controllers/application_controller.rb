@@ -12,6 +12,7 @@ class ApplicationController < ActionController::API
     end
 
     def authenticate_user
+      sleep 1.5
       header = request.headers["Authorization"]
       token = header.split(" ")[1]
       begin

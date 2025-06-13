@@ -12,7 +12,7 @@ class SshkeysController < ApplicationController
   # POST /sshkeys
   def create
     if @sshkey.save
-      render "sshkeys/sshkey", status: :created, location: @sshkey
+      render "sshkeys/show", status: :created, location: @sshkey
     else
       render locals: { error: @sshkey.errors }, status: :unprocessable_entity
     end
@@ -21,7 +21,7 @@ class SshkeysController < ApplicationController
   # PATCH/PUT /sshkeys/1
   def update
     if @sshkey.update(sshkey_params)
-      render "sshkeys/sshkey", status: :ok, location: @sshkey
+      render "sshkeys/show", status: :ok, location: @sshkey
     else
       render locals: { error: @sshkey.errors }, status: :unprocessable_entity
     end

@@ -1,12 +1,6 @@
-if(error)
-    {
-        error:
-    }
-else
-    {
-        message: "Login successful",
-        salt: @user.salt,
-        private_key: @user.rsa.private_key,
-        private_key_iv: @user.rsa.private_key_iv
-    }
-end
+{
+    message: "Login successful",
+    salt: @user.salt,
+    private_key: @user.rsa.private_key,
+    private_key_iv: @user.rsa.private_key_iv
+}

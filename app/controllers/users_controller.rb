@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if @user&.authenticate(params[:user][:password])
       generate_token
     else
-      render locals: { error: "Invalid email or password" }, status: :unauthorized
+      render "errors/error", locals: { error: "Invalid email or password" }, status: :unauthorized
     end
   end
 
