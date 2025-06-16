@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
     end
 
     def authenticate_user
-      sleep 1.5
+      sleep 0.5
       header = request.headers["Authorization"]
       token = header.split(" ")[1]
       begin
@@ -20,6 +20,9 @@ class ApplicationController < ActionController::API
         @current_user = User.new(id: decoded["user_id"])
       rescue JWT::DecodeError
         render "errors/error", locals: { error: "Invalid token" }, status: :unauthorized
+      end
+      if rand < 0.3
+        render "errors/error", locals: { error: "Random error" }, status: :unauthorized
       end
     end
 
