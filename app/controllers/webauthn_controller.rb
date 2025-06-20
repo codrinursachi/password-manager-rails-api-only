@@ -2,6 +2,9 @@ class WebauthnController < ApplicationController
   skip_before_action :authenticate_user
 
   def registration_options
+    if User.exists?(email: params[:email])
+      return render "errors/error", locals: { error: "User already exists" }, status: :conflict
+    end
     user = User.create!(
       email: params[:email],
       name: params[:name],
@@ -73,7 +76,7 @@ class WebauthnController < ApplicationController
   def authentication_options
     user = User.find_by(email: params[:email])
     unless user && user.credential_id
-      return render locals: { error: "User not registered with passkeys" }, status: :not_found
+      return render "errors/error", locals: { error: "User not registered with passkeys" }, status: :not_found
     end
 
     @request_options = WebAuthn::Credential.options_for_get(allow: [ user.credential_id ])

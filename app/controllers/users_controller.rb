@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user
   def create
+    if User.exists?(email: params[:user][:email])
+      return render "errors/error", locals: { error: "User already exists" }, status: :conflict
+    end
     @user = User.new(user_params)
     if @user.save
       @user.folders << [
